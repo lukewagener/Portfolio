@@ -11,9 +11,22 @@ import { HiOutlineMail } from "react-icons/hi";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 import { Link } from "react-scroll";
 
+const resumeURL = "http://localhost:3000/Resume.docx";
+
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
+
+  const downloadFromURL = (url) => {
+    const fileName = url.split("/").pop();
+    const aTag = document.createElement("a");
+    aTag.href = url;
+    aTag.setAttribute("download", fileName);
+    document.body.appendChild(aTag);
+    aTag.click();
+    aTag.remove();
+  };
+
   return (
     <div className="fixed w-full h-[80px] flex justify-between items-center px-4 bg-[#000000] text-gray-300">
       <div>
@@ -64,29 +77,29 @@ const Navbar = () => {
         }
       >
         <li className="py-6 text-4xl">
-        <Link onClick={handleClick} to="home" smooth={true} duration={500}>
-          Home
-        </Link>
+          <Link onClick={handleClick} to="home" smooth={true} duration={500}>
+            Home
+          </Link>
         </li>
         <li className="py-6 text-4xl">
-        <Link onClick={handleClick} to="about" smooth={true} duration={500}>
-          About
-        </Link>
-        </li>
-        <li className="py-6 text-4xgitl">
-        <Link onClick={handleClick} to="skills" smooth={true} duration={500}>
-          Skills
-        </Link>
+          <Link onClick={handleClick} to="about" smooth={true} duration={500}>
+            About
+          </Link>
         </li>
         <li className="py-6 text-4xl">
-        <Link onClick={handleClick} to="work" smooth={true} duration={500}>
-          Work
-        </Link>
+          <Link onClick={handleClick} to="skills" smooth={true} duration={500}>
+            Skills
+          </Link>
         </li>
         <li className="py-6 text-4xl">
-        <Link onClick={handleClick} to="contact" smooth={true} duration={500}>
-          Contact
-        </Link>
+          <Link onClick={handleClick} to="work" smooth={true} duration={500}>
+            Work
+          </Link>
+        </li>
+        <li className="py-6 text-4xl">
+          <Link onClick={handleClick} to="contact" smooth={true} duration={500}>
+            Contact
+          </Link>
         </li>
       </ul>
       {/* Social icons */}
@@ -95,7 +108,7 @@ const Navbar = () => {
           <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-blue-600">
             <a
               className="flex justify-between items-center w-full text-gray-300"
-              href="/"
+              href="https://www.linkedin.com/in/lukewagener/"
             >
               LinkedIn <FaLinkedin size={30} />
             </a>
@@ -103,7 +116,7 @@ const Navbar = () => {
           <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-gray-900">
             <a
               className="flex justify-between items-center w-full text-gray-300"
-              href="/"
+              href="https://github.com/lukewagener"
             >
               Github <FaGithub size={30} />
             </a>
@@ -111,20 +124,28 @@ const Navbar = () => {
           <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-pink-800">
             <a
               className="flex justify-between items-center w-full text-gray-300"
-              href="/"
+              href="https://www.instagram.com/luke.wagener/"
             >
               Instagram <FaInstagram size={30} />
             </a>
           </li>
-          <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-yellow-600">
-            <a
-              className="flex justify-between items-center w-full text-gray-300"
-              href="/"
-            >
-              Email <HiOutlineMail size={30} />
-            </a>
-          </li>
-          <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-green-600">
+          <Link to="contact" smooth={true} duration={500}>
+            <li className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-yellow-600">
+              <a
+                className="flex justify-between items-center w-full text-gray-300"
+                href="/"
+              >
+                Email <HiOutlineMail size={30} />
+              </a>
+            </li>
+          </Link>
+
+          <li
+            onClick={() => {
+              downloadFromURL(resumeURL);
+            }}
+            className="w-[160px] h-[60px] flex justify-between items-center ml-[-100px] hover:ml-[-10px] duration-300 bg-green-600"
+          >
             <a
               className="flex justify-between items-center w-full text-gray-300"
               href="/"
